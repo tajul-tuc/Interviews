@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <script type="text/javascript">
+         function konvertor() {
+           var unixTimestamp = document.getElementById("unixTime").value; //1645527600
+           var normalesTimestamp = document.getElementById("normalesTime").value; //2022-02-22 12:00:00
+           //unix to normale time stamp 
+           if(unixTimestamp != 0){
+             var date = new Date(unixTimestamp * 1000); // Mon Apr 25 2022 12:00:00 GMT+01 (Mitteleuropäische Normalzeit)
+               var year = date.getFullYear(); // 2022
+               var month = (date.getMonth() + 1).toString().padStart(2, '0'); // "04"
+               var day = date.getDate().toString().padStart(2, '0'); // "25"
+               var hour = date.getHours().toString().padStart(2, '0');; // 12
+               var minute = date.getMinutes().toString().padStart(2, '0'); // 00
+               var second = date.getSeconds().toString().padStart(2, '0'); // 00
+         
+               var normaleTime= year+'-'+month+'-'+day+' '+hour+':'+minute+':'+second;
+         
+             document.getElementById('unixToNormales').innerHTML = 'Unix To Normales : '+normaleTime;
+           }
+           //normales to unix time stamp
+           if(normalesTimestamp != 0){
+             var parts = normalesTimestamp.trim().split(' '); //2022-02-22 12:00:00
+               var date = parts[0].split('-'); //2022-02-22
+               var time = (parts[1] ? parts[1] : '00:00:00').split(':'); //12:00:00
+               //0 = January - 11 = December
+               var d = new Date(date[0],date[1]-1,date[2],time[0],time[1],time[2]);
+               
+               var unixTime = d.getTime() / 1000;
+         
+             document.getElementById('normalesToUnix').innerHTML = 'Normales To Unix : '+unixTime;
+           }
+           //null inputs
+           if(unixTimestamp == 0 && normalesTimestamp == 0){
+             alert("Please enter atleast one timestamp!");
+           }
+         }
+      </script>
+   </head>
+   <body>
+      <h2>Task 02 : Konvertor</h2>
+      <label for="unix">Enter an Unix timestamp:</label>
+      <br>
+      <input type="text" id="unixTime" name="unix" placeholder="1645527600">
+      <br>
+      <label for="normale">Enter a Normal timestamp:</label>
+      <br>
+      <input type="text" id="normalesTime" name="normale" placeholder="2022-02-22 12:00:00">
+      <br>
+      <br>
+      <input type="button" value="Konvertor" onclick="konvertor();">
+      <p id='unixToNormales'></p>
+      <p id='normalesToUnix'></p>
+   </body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <script type="text/javascript">
+         function evenOdd() {
+         	if (document.getElementById("arrayList").value != '') {
+         		arrayList = document.getElementById("arrayList").value;
+           	//Split the arrayList with whitespace
+           	arrayList = arrayList.split(" ");
+           	//Sort the arrayList in ascending order
+           	arrayList.sort(function(a, b) {
+             		return a - b
+           	});
+           	evenList = []
+           	oddList = []
+           	for (let i = 0; i < arrayList.length; i++) {
+             		if (arrayList[i] % 2 == 0) {
+               		evenList = evenList + ' ' + arrayList[i];
+             		} else {
+               		oddList = oddList + ' ' + arrayList[i];
+             		}
+           	}
+           	document.getElementById('evenNumbers').innerHTML = 'Even List : ' + evenList;
+           	document.getElementById('oddNumbers').innerHTML = 'Odd List : ' + oddList;
+         	} else {
+         		alert("Please enter a space separated array!");
+         	}        
+         }
+      </script>
+   </head>
+   <body>
+      <h2>Task 01 : Even Odd</h2>
+      <label for="arrayList">Enter a space separated array:</label>
+      <br>
+      <input type="text" id="arrayList" name="arrayList" placeholder="1 2 3 4">
+      <br>
+      <br>
+      <input type="button" value="Submit" onclick="evenOdd();">
+      <p id='evenNumbers'></p>
+      <p id='oddNumbers'></p>
+   </body>
+</html>
